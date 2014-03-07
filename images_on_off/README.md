@@ -1,5 +1,5 @@
-Images On/Off (Chrome Extension)
-Copyright © 2013, SingleClickApps.com
+Images On/Off (Opera Extension)
+Copyright © 2013-2014, SingleClickApps.com
 
 ## Licensed under GPL:
 http://www.gnu.org/licenses/gpl.html
