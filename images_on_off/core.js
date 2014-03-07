@@ -34,11 +34,16 @@ if(chromeContentSettings) {
 		}
 	});
 
+	chrome.tabs.onActivated.addListener(function() {
+		//console.info("onActivated");
+		getSettings();
+	});
+	
 	chrome.tabs.onHighlighted.addListener(function() {
 		//console.info("onHighlighted");
 		getSettings();
 	});
-
+	
 	chrome.windows.onFocusChanged.addListener(function() {
 		//console.info("onFocusChanged");
 		getSettings();
@@ -58,6 +63,7 @@ if(chromeContentSettings) {
 }
 
 function updateIcon(setting) {
+	//console.info("icon-" + setting + ".png");
 		chrome.browserAction.setIcon({path:"icon-" + setting + ".png"});
 		
 		/*
@@ -68,7 +74,7 @@ function updateIcon(setting) {
 		*/
 }
 
-function getSettings() {
+function getSettings() { 	
 	chrome.tabs.getSelected(undefined, function(tab) {
 		incognito = tab.incognito;
 		url = tab.url;
@@ -108,25 +114,6 @@ function changeSettings() {
 				});
 				
 				updateIcon(newSetting);
-
-/*var millisecondsPerMinute = 1000 * 60 ;
-var oneMinuteAgo = (new Date()).getTime() - millisecondsPerMinute;
-chrome.browsingData.remove({
-  "since": oneMinuteAgo
-}, {
-  "appcache": false,
-  "cache": true,
-  "cookies": false,
-  "downloads": false,
-  "fileSystems": false,
-  "formData": false,
-  "history": false,
-  "indexedDB": false,
-  "localStorage": false,
-  "pluginData": false,
-  "passwords": false,
-  "webSQL": false
-});*/
 
 				if (prefs.autoRefresh) {
 					chrome.tabs.reload(tabId,{"bypassCache":true});
